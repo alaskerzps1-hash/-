@@ -1,0 +1,6 @@
+{
+  "name": "بوابة وزارة الصحة — نظام شؤون الموظفين وإدارة القيادة",
+  "description": "منصة وزارة الصحة المتكاملة لاستعراض سجل الموظفين والرتب والأكواد المؤسسية مع لوحة تحكم وإدارة شاملة للمدير العام.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

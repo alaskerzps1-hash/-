@@ -1,0 +1,490 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Authenticated portal user profile with role isolation",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "email": {
+          "type": "string",
+          "maxLength": 200
+        },
+        "displayName": {
+          "type": "string",
+          "maxLength": 120
+        },
+        "role": {
+          "type": "string",
+          "enum": ["director", "supervisor", "staff"]
+        },
+        "employeeCode": {
+          "type": "string",
+          "maxLength": 32,
+          "pattern": "^[A-Z0-9\\-]+$"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["uid", "email", "displayName", "role", "createdAt", "updatedAt"]
+    },
+    "AdminRecord": {
+      "title": "AdminRecord",
+      "description": "Authorized Ministry Director / Admin privileges record",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "email": {
+          "type": "string",
+          "maxLength": 200
+        },
+        "displayName": {
+          "type": "string",
+          "maxLength": 120
+        },
+        "rankTitle": {
+          "type": "string",
+          "maxLength": 80
+        },
+        "grantedBy": {
+          "type": "string",
+          "maxLength": 128
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["uid", "email", "displayName", "rankTitle", "grantedBy", "createdAt"]
+    },
+    "Department": {
+      "title": "Department",
+      "description": "Ministry of Health sector, directorate, or hospital department",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "code": {
+          "type": "string",
+          "maxLength": 24,
+          "pattern": "^[A-Z0-9\\-]+$"
+        },
+        "name": {
+          "type": "string",
+          "maxLength": 120
+        },
+        "sector": {
+          "type": "string",
+          "maxLength": 100
+        },
+        "headName": {
+          "type": "string",
+          "maxLength": 120
+        },
+        "headCode": {
+          "type": "string",
+          "maxLength": 32
+        },
+        "facility": {
+          "type": "string",
+          "maxLength": 120
+        },
+        "visibility": {
+          "type": "string",
+          "enum": ["public", "restricted"]
+        },
+        "createdBy": {
+          "type": "string",
+          "maxLength": 128
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["id", "code", "name", "sector", "headName", "headCode", "facility", "visibility", "createdBy", "createdAt", "updatedAt"]
+    },
+    "Employee": {
+      "title": "Employee",
+      "description": "Ministry of Health employee directory record with rank and code",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "employeeCode": {
+          "type": "string",
+          "minLength": 4,
+          "maxLength": 24,
+          "pattern": "^MOH-[A-Z0-9\\-]+$"
+        },
+        "fullName": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 120
+        },
+        "rank": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 80
+        },
+        "rankLevel": {
+          "type": "number",
+          "description": "Hierarchy level from 1 (highest executive) to 50"
+        },
+        "departmentId": {
+          "type": "string",
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "departmentName": {
+          "type": "string",
+          "maxLength": 120
+        },
+        "specialization": {
+          "type": "string",
+          "maxLength": 120
+        },
+        "facility": {
+          "type": "string",
+          "maxLength": 120
+        },
+        "status": {
+          "type": "string",
+          "enum": ["active", "on_leave", "mission", "suspended"]
+        },
+        "shift": {
+          "type": "string",
+          "enum": ["morning", "evening", "night", "on_call"]
+        },
+        "extension": {
+          "type": "string",
+          "maxLength": 16,
+          "pattern": "^[0-9\\-]+$"
+        },
+        "hireDate": {
+          "type": "string",
+          "maxLength": 20,
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+        },
+        "visibility": {
+          "type": "string",
+          "enum": ["public", "restricted"]
+        },
+        "notes": {
+          "type": "string",
+          "maxLength": 600
+        },
+        "discordId": {
+          "type": "string",
+          "maxLength": 40,
+          "pattern": "^[0-9]+$"
+        },
+        "discordUsername": {
+          "type": "string",
+          "maxLength": 100
+        },
+        "createdBy": {
+          "type": "string",
+          "maxLength": 128
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["id", "employeeCode", "fullName", "rank", "rankLevel", "departmentId", "departmentName", "specialization", "facility", "status", "shift", "extension", "hireDate", "visibility", "notes", "createdBy", "createdAt", "updatedAt"]
+    },
+    "DiscordRoleMapping": {
+      "title": "DiscordRoleMapping",
+      "description": "Mapping between Discord Server Role (rank) and Ministry of Health rank and default department",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "guildId": {
+          "type": "string",
+          "maxLength": 40,
+          "pattern": "^[0-9]+$"
+        },
+        "discordRoleId": {
+          "type": "string",
+          "maxLength": 40,
+          "pattern": "^[0-9]+$"
+        },
+        "discordRoleName": {
+          "type": "string",
+          "maxLength": 120
+        },
+        "rank": {
+          "type": "string",
+          "maxLength": 80
+        },
+        "rankLevel": {
+          "type": "number",
+          "description": "Mapped Ministry of Health rank level 1-50"
+        },
+        "departmentId": {
+          "type": "string",
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "departmentName": {
+          "type": "string",
+          "maxLength": 120
+        },
+        "autoSync": {
+          "type": "boolean"
+        },
+        "createdBy": {
+          "type": "string",
+          "maxLength": 128
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["id", "guildId", "discordRoleId", "discordRoleName", "rank", "rankLevel", "departmentId", "departmentName", "autoSync", "createdBy", "createdAt", "updatedAt"]
+    },
+    "DirectorDecision": {
+      "title": "DirectorDecision",
+      "description": "Official administrative decisions, promotions, and directives issued by the Director",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "decisionNumber": {
+          "type": "string",
+          "maxLength": 32,
+          "pattern": "^DEC-[0-9]{4}-[0-9]+$"
+        },
+        "title": {
+          "type": "string",
+          "maxLength": 160
+        },
+        "type": {
+          "type": "string",
+          "enum": ["promotion", "transfer", "commendation", "directive", "suspension"]
+        },
+        "targetEmployeeId": {
+          "type": "string",
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "targetEmployeeName": {
+          "type": "string",
+          "maxLength": 120
+        },
+        "targetEmployeeCode": {
+          "type": "string",
+          "maxLength": 24
+        },
+        "previousRank": {
+          "type": "string",
+          "maxLength": 80
+        },
+        "newRank": {
+          "type": "string",
+          "maxLength": 80
+        },
+        "effectiveDate": {
+          "type": "string",
+          "maxLength": 20,
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+        },
+        "summary": {
+          "type": "string",
+          "maxLength": 800
+        },
+        "issuedBy": {
+          "type": "string",
+          "maxLength": 128
+        },
+        "issuedByName": {
+          "type": "string",
+          "maxLength": 120
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["id", "decisionNumber", "title", "type", "targetEmployeeId", "targetEmployeeName", "targetEmployeeCode", "previousRank", "newRank", "effectiveDate", "summary", "issuedBy", "issuedByName", "createdAt"]
+    },
+    "AuditLog": {
+      "title": "AuditLog",
+      "description": "Immutable director administrative audit trail",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "action": {
+          "type": "string",
+          "enum": ["create_employee", "update_employee", "delete_employee", "promote_employee", "create_department", "delete_department", "create_rank", "update_rank", "delete_rank", "issue_decision", "grant_admin", "revoke_admin", "seed_registry", "discord_sync", "update_discord_mapping"]
+        },
+        "targetType": {
+          "type": "string",
+          "enum": ["employee", "department", "rank", "decision", "admin", "system", "discord"]
+        },
+        "targetId": {
+          "type": "string",
+          "maxLength": 64
+        },
+        "targetName": {
+          "type": "string",
+          "maxLength": 140
+        },
+        "targetCode": {
+          "type": "string",
+          "maxLength": 32
+        },
+        "details": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "actorUid": {
+          "type": "string",
+          "maxLength": 128
+        },
+        "actorName": {
+          "type": "string",
+          "maxLength": 120
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["id", "action", "targetType", "targetId", "targetName", "targetCode", "details", "actorUid", "actorName", "createdAt"]
+    },
+    "RankTierConfig": {
+      "title": "RankTierConfig",
+      "description": "Configurable Ministry of Health employee rank tier managed by Directors",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "level": {
+          "type": "number",
+          "description": "Rank hierarchy level from 1 to 50"
+        },
+        "title": {
+          "type": "string",
+          "maxLength": 80
+        },
+        "category": {
+          "type": "string",
+          "maxLength": 80
+        },
+        "codeRange": {
+          "type": "string",
+          "maxLength": 60
+        },
+        "authorityScope": {
+          "type": "string",
+          "maxLength": 300
+        },
+        "discordRoleId": {
+          "type": "string",
+          "maxLength": 40,
+          "pattern": "^[0-9]*$"
+        },
+        "visibility": {
+          "type": "string",
+          "enum": ["public", "restricted"]
+        },
+        "createdBy": {
+          "type": "string",
+          "maxLength": 128
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["id", "level", "title", "category", "codeRange", "authorityScope", "visibility", "createdBy", "createdAt", "updatedAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/UserProfile" },
+      "description": "Authenticated user profiles isolated to owner or director"
+    },
+    "/admins/{adminId}": {
+      "schema": { "$ref": "#/entities/AdminRecord" },
+      "description": "Trusted allowlist of Ministry Directors with administrative authority"
+    },
+    "/ranks/{rankId}": {
+      "schema": { "$ref": "#/entities/RankTierConfig" },
+      "description": "Ministry of Health employee rank tiers managed by Directors"
+    },
+    "/departments/{deptId}": {
+      "schema": { "$ref": "#/entities/Department" },
+      "description": "Ministry departments and hospital divisions"
+    },
+    "/employees/{employeeId}": {
+      "schema": { "$ref": "#/entities/Employee" },
+      "description": "Ministry of Health employee directory with names, ranks, and codes"
+    },
+    "/discordMappings/{mappingId}": {
+      "schema": { "$ref": "#/entities/DiscordRoleMapping" },
+      "description": "Discord Role to Ministry Rank mappings managed by Directors"
+    },
+    "/directorDecisions/{decisionId}": {
+      "schema": { "$ref": "#/entities/DirectorDecision" },
+      "description": "Official administrative decisions and rank promotions issued by the Director"
+    },
+    "/auditLogs/{logId}": {
+      "schema": { "$ref": "#/entities/AuditLog" },
+      "description": "Immutable director audit logs"
+    }
+  }
+}
